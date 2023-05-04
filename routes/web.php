@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CabangController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartemenController;
 use App\Http\Controllers\KaryawanController;
@@ -94,4 +95,9 @@ Route::middleware(['auth:user'])->group(function(){
      Route::get('/konfigurasi/lokasikantor', [KonfigurasiController::class, 'lokasikantor']);
      Route::post('/konfigurasi/updatelokasikantor', [KonfigurasiController::class, 'updatelokasikantor']);
 
+     //Jamkerja
+     Route::get('/konfigurasi/jamkerja',[KonfigurasiController::class,'jamkerja']);
+
+    //Kantor Cabang
+    Route::get('/cabang',[Cabangcontroller::class, 'index']);
 });

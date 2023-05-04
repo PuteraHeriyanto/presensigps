@@ -84,13 +84,13 @@
         <table style="width: 100%">
             <tr>
                 <td style="width : 30px">
-                    <img src="{{ asset('assets/img/logopm.png') }}" width="80" heigh="80" alt="">
+                    <img src="{{ asset('assets/img/logobic.png') }}" width="80" heigh="80" alt="">
                 </td>
                 <td>
                     <span id="title">
                         LAPORAN PRESENSI KARYAWAN <br>
                         PERIODE {{ strtoupper($namabulan[$bulan]) }} {{ $tahun }} <br>
-                        PT.PUTRA MANUNGGAL RASA <br>
+                        PT.BASIRIH INDUSTRIAL <br>
                     </span>
                     <span style="line-height: 3px"><i> Jl.Gubernur Soebardjo, Basirih, Kec. Banjarmasin Bar., Kota Banjarmasin, Kalimantan Selatan</i></span>
                 </td>
@@ -136,32 +136,19 @@
                 <th>No.</th>
                 <th>Tanggal</th>
                 <th>Jam In</th>
-                <th>Foto In</th>
                 <th>Jam Out</th>
-                <th>Foto Out</th>
                 <th>Keterangan</th>
                 <th>Jumlah Jam Kerja</th>
             </tr>
             @foreach ($presensi as $d )
             @php
-            $path_in = Storage::url('uploads/absensi/'.$d->foto_in);
-            $path_out = Storage::url('uploads/absensi/'.$d->foto_out);
             $jamterlambat = selisih('06:45:00',$d->jam_in);
             @endphp
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ date("d-m-Y",strtotime($d->tgl_presensi)) }}</td>
                 <td>{{ $d->jam_in }}</td>
-                <td><img src="{{ url($path_in) }}" alt="" class="foto"></td>
                 <td>{{ $d->jam_out != null ? $d->jam_out : 'Belum Absen'}}</td>
-                <td>
-                    @if ($d->foto_out != null)
-                    <img src="{{ url($path_out) }}" alt="" class="foto">
-                    @else
-                    <img src="{{ asset('assets/img/camera.jpg') }}" alt="" class="foto">
-                    @endif
-
-                </td>
                 <td>
                     @if($d->jam_in > '06:45')
                     Terlambat {{ $jamterlambat }}

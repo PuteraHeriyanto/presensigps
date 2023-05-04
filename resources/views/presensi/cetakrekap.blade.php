@@ -86,13 +86,13 @@
         <table style="width: 100%">
             <tr>
                 <td style="width : 30px">
-                    <img src="{{ asset('assets/img/logobic.png') }}" width="80" heigh="80" alt="">
+                    <img src="{{ asset('assets/img/logopm.png') }}" width="80" heigh="80" alt="">
                 </td>
                 <td>
                     <span id="title">
                         REKAP PRESENSI KARYAWAN <br>
                         PERIODE {{ strtoupper($namabulan[$bulan]) }} {{ $tahun }} <br>
-                        PT.BASIRIH INDUSTRIAL <br>
+                        PT.PUTRA MANUNGGAL RASA <br>
                     </span>
                     <span style="line-height: 3px"><i> Jl.Gubernur Soebardjo, Basirih, Kec. Banjarmasin Bar., Kota Banjarmasin, Kalimantan Selatan</i></span>
                 </td>

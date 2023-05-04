@@ -261,6 +261,15 @@ class PresensiController extends Controller
          ->whereRaw('YEAR(tgl_presensi)="'. $tahun .'"')
          ->orderBy('tgl_presensi','desc')
          ->get();
+
+        if(isset($_POST['exportexcel'])){
+        $time =date("d-m-Y H:i:s");
+        //fungsi header dengan mengirimkan raw data excel
+        header("Content-type: application/vnd-ms-excel");
+        //mendefinisikan nama file ekspor "hasil-export.xls"
+        header("Content-Disposition: attachment; filename=Laporan Presensi Karyawan $time.xls");
+        return view('presensi.cetaklaporanexcel', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi'));
+    }
         return view('presensi.cetaklaporan', compact('bulan', 'tahun', 'namabulan', 'karyawan', 'presensi'));
     }
 
@@ -314,7 +323,15 @@ class PresensiController extends Controller
         ->groupByRaw('presensi.nik,nama_lengkap')
         ->get();
 
-return view('presensi.cetakrekap', compact('bulan','tahun','rekap','namabulan'));
+        if(isset($_POST['exportexcel'])){
+        $time =date("d-m-Y H:i:s");
+        //fungsi header dengan mengirimkan raw data excel
+        header("Content-type: application/vnd-ms-excel");
+        //mendefinisikan nama file ekspor "hasil-export.xls"
+        header("Content-Disposition: attachment; filename=Rekap Presensi Karyawan $time.xls");
+        }
+
+        return view('presensi.cetakrekap', compact('bulan','tahun','rekap','namabulan'));
     }
 
     public function izinsakit(Request $request)
@@ -336,7 +353,7 @@ return view('presensi.cetakrekap', compact('bulan','tahun','rekap','namabulan'))
         }
         $query->orderBy('tgl_izin','desc');
         $izinsakit = $query->paginate(25);
-        $izinsakit->appends->all();
+        $izinsakit->appends($request->all());
         return view('presensi.izinsakit',compact('izinsakit'));
     }
 
